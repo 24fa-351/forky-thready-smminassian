@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-void pattern1(int things);
+
+int pattern1(int things);
 void pattern2(int things);
 
 int main(int __argc, char *__argv[])
@@ -22,4 +23,8 @@ int main(int __argc, char *__argv[])
         }
 
     }
+}
+
+int pattern1(int things){
+    
 }
