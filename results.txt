@@ -1,1 +1,44 @@
-Still working on this project.
+Pattern 1: creating 2 processes
+Parent created child 0 (pid 76185)
+Parent created child 1 (pid 76185)
+Parent created child 2 (pid 76185)
+Parent created child 3 (pid 76185)
+Process 2 (pid 76185) created: will sleep for 7 seconds
+Process 2 (pid 76185): exiting
+Pattern 1: creating 2 processes
+Parent created child 0 (pid 76185)
+Process 2 (pid 76185) created: will sleep for 2 seconds
+Process 2 (pid 76185): exiting
+Pattern 1: creating 2 processes
+Parent created child 0 (pid 76185)
+Parent created child 1 (pid 76185)
+Parent created child 2 (pid 76185)
+Parent created child 3 (pid 76185)
+Process 2 (pid 76185) created: will sleep for 7 seconds
+Process 2 (pid 76185): exiting
+Pattern 1: creating 2 processes
+Parent created child 0 (pid 76291)
+Process 2 (pid 76291) created: will sleep for 2 seconds
+Process 2 (pid 76291): exiting
+Pattern 1: creating 2 processes
+Parent created child 0 (pid 76186)
+Parent created child 1 (pid 76186)
+Parent created child 2 (pid 76186)
+Parent created child 3 (pid 76186)
+Process 2 (pid 76186) created: will sleep for 7 seconds
+Process 2 (pid 76186): exiting
+Pattern 1: creating 2 processes
+Parent created child 0 (pid 76292)
+Process 2 (pid 76292) created: will sleep for 2 seconds
+Process 2 (pid 76292): exiting
+Pattern 1: creating 2 processes
+Parent created child 0 (pid 76186)
+Parent created child 1 (pid 76186)
+Parent created child 2 (pid 76186)
+Parent created child 3 (pid 76186)
+Process 2 (pid 76186) created: will sleep for 7 seconds
+Process 2 (pid 76186): exiting
+Pattern 1: creating 2 processes
+Parent created child 0 (pid 76186)
+Process 2 (pid 76186) created: will sleep for 2 seconds
+Process 2 (pid 76186): exiting
