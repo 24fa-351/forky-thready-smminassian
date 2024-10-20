@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
 
 int pattern1(int things);
 void pattern2(int things);
@@ -9,6 +11,7 @@ int main(int __argc, char *__argv[])
 {
     int things = 0;
     int pattern = 0;
+    pid_t pid = fork();
 
     if (__argc == 3)
     {
