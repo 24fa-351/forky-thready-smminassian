@@ -3,12 +3,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <sys/wait.h>
+#include <time.h>
+
 
 void pattern1(int things, FILE *fptr);
 // void pattern2(int things);
 void childPattern1(int children, pid_t pid, FILE *fptr, int things);
 
-int main(int __argc, char *__argv[])
+int main(int argc, char *argv[])
 {
     int things = 0;
     int pattern = 0;
@@ -16,11 +19,11 @@ int main(int __argc, char *__argv[])
     FILE *fptr;
     fptr = fopen("results.txt", "w");
 
-    if (__argc == 3)
+    if (argc == 3)
     {
-        things = atoi(__argv[1]);
-        pattern = atoi(__argv[2]);
-
+    	srand(time(NULL));
+        things = atoi(argv[1]);
+        pattern = atoi(argv[2]);
         if (pattern == 1)
         {
             pattern1(things, fptr);
@@ -35,27 +38,38 @@ int main(int __argc, char *__argv[])
 void pattern1(int things, FILE *fptr)
 {
     int ix;
-    // int duplicateProcess[things];
+    int pids[things];
+    fprintf(fptr, "Pattern 1: creating %d processes\n", things);
     
-
-    // int dupProcessCount = 0;
-
-    for (ix = 1; ix <= things; ix++)
+    
+    for (ix = 0; ix <= things; ix++)
     {
-        int children = rand() % (5);
-        // if(dupProcessCount != 0){
-        //     if(duplicateProcess[dupProcessCount] = randProcess){
-
-        //     }
-        fprintf(fptr, "Pattern 1: creating %d processes\n", things);
-        pid_t pid = fork();
-        for (int dx = 0; dx <= children; dx++)
-        {
-            fprintf(fptr, "Parent created child %d (pid %d)\n", dx, getpid());
-        }
-        childPattern1(children, pid, fptr, things);
+    	pid_t pid = fork();
+    	fprintf(fptr, "Parent Created child %d,with pid %d\n", ix, getpid());
+    	pids[ix] = pid;
     }
+    for(int jx = 0; jx <= things ; jx++){
+    
+      	fflush(fptr);
+    	
+    	if(pids[jx] == 0){
+    	
+        	int children = rand() % (5);
+        	childPattern1(children, pids[jx], fptr, things);
+        	exit(0);
+        }
+        else if(pids[jx] > 0){
+       		int status;
+		wait(&status);
+		fprintf(fptr, "Child %d with pid: %d completed\n", ix, getpid());
+     	}	
+        else{
+     		perror("Fork Failed");
+     		exit(1);
+     	}   
+     } 
 }
+
 
 // each process is independent from each other. So this means that children should be random and process should be random
 
