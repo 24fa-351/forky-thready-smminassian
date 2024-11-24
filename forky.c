@@ -55,7 +55,6 @@ void pattern1(int things)
         // int makeMoreProcesses = (rand() % 1) + 1;
         if (pid == 0)
         {
-
             child(pid, things, randProcess, sleepyTime, false);
             exit(0);
         }
@@ -104,6 +103,7 @@ void pattern2(int things)
             pid_t grandChild_pid = fork();
             if (grandChild_pid == 0)
             {
+                
                 fprintf(stdout, "Child %d with pid %d created grandchild %d with pid %d \n", jx, pid, jx, getpid());
                 int grandChildSleepyTime = (rand() % (Max - Min + 1)) + Min;
                 child(grandChild_pid, things, randProcess, grandChildSleepyTime, true);
