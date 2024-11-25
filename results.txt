@@ -1,44 +1,44 @@
 Pattern 1: creating 2 processes
-Parent created child 0 (pid 76185)
-Parent created child 1 (pid 76185)
-Parent created child 2 (pid 76185)
-Parent created child 3 (pid 76185)
-Process 2 (pid 76185) created: will sleep for 7 seconds
-Process 2 (pid 76185): exiting
+Parent created child 0 (pid 157787)
+Parent created child 1 (pid 157787)
+Parent created child 2 (pid 157787)
+Parent created child 3 (pid 157787)
+Process 2 (pid 157787) created: will sleep for 7 seconds
+Process 2 (pid 157787): exiting
 Pattern 1: creating 2 processes
-Parent created child 0 (pid 76185)
-Process 2 (pid 76185) created: will sleep for 2 seconds
-Process 2 (pid 76185): exiting
+Parent created child 0 (pid 157787)
+Process 2 (pid 157787) created: will sleep for 2 seconds
+Process 2 (pid 157787): exiting
 Pattern 1: creating 2 processes
-Parent created child 0 (pid 76185)
-Parent created child 1 (pid 76185)
-Parent created child 2 (pid 76185)
-Parent created child 3 (pid 76185)
-Process 2 (pid 76185) created: will sleep for 7 seconds
-Process 2 (pid 76185): exiting
+Parent created child 0 (pid 157786)
+Parent created child 1 (pid 157786)
+Parent created child 2 (pid 157786)
+Parent created child 3 (pid 157786)
+Process 2 (pid 157786) created: will sleep for 7 seconds
+Process 2 (pid 157786): exiting
 Pattern 1: creating 2 processes
-Parent created child 0 (pid 76291)
-Process 2 (pid 76291) created: will sleep for 2 seconds
-Process 2 (pid 76291): exiting
+Parent created child 0 (pid 157786)
+Process 2 (pid 157786) created: will sleep for 2 seconds
+Process 2 (pid 157786): exiting
 Pattern 1: creating 2 processes
-Parent created child 0 (pid 76186)
-Parent created child 1 (pid 76186)
-Parent created child 2 (pid 76186)
-Parent created child 3 (pid 76186)
-Process 2 (pid 76186) created: will sleep for 7 seconds
-Process 2 (pid 76186): exiting
+Parent created child 0 (pid 157787)
+Parent created child 1 (pid 157787)
+Parent created child 2 (pid 157787)
+Parent created child 3 (pid 157787)
+Process 2 (pid 157787) created: will sleep for 7 seconds
+Process 2 (pid 157787): exiting
 Pattern 1: creating 2 processes
-Parent created child 0 (pid 76292)
-Process 2 (pid 76292) created: will sleep for 2 seconds
-Process 2 (pid 76292): exiting
+Parent created child 0 (pid 157891)
+Process 2 (pid 157891) created: will sleep for 2 seconds
+Process 2 (pid 157891): exiting
 Pattern 1: creating 2 processes
-Parent created child 0 (pid 76186)
-Parent created child 1 (pid 76186)
-Parent created child 2 (pid 76186)
-Parent created child 3 (pid 76186)
-Process 2 (pid 76186) created: will sleep for 7 seconds
-Process 2 (pid 76186): exiting
+Parent created child 0 (pid 157786)
+Parent created child 1 (pid 157786)
+Parent created child 2 (pid 157786)
+Parent created child 3 (pid 157786)
+Process 2 (pid 157786) created: will sleep for 7 seconds
+Process 2 (pid 157786): exiting
 Pattern 1: creating 2 processes
-Parent created child 0 (pid 76186)
-Process 2 (pid 76186) created: will sleep for 2 seconds
-Process 2 (pid 76186): exiting
+Parent created child 0 (pid 157892)
+Process 2 (pid 157892) created: will sleep for 2 seconds
+Process 2 (pid 157892): exiting

@@ -81,7 +81,7 @@ void pattern1(int things)
     }
 }
 
-void pattern2(int things)
+void pattern2(int numOfChildrenToCreate)
 {
     int ix;
     int jx = 1;
@@ -96,28 +96,10 @@ void pattern2(int things)
 
     
     if (pid == 0){
-            child(pid, things, randProcess, sleepyTime, false);
+            child(numOfChildrenToCreate-1);
+            exit(0);
        
-            sleepyTime = (rand() % (Max - Min + 1)) + Min;
-            randProcess = (rand() % things) + 1;
-            pid_t grandChild_pid = fork();
            
-            if (grandChild_pid == 0)
-            {
-                pid_t greatGrandChild_pid = fork();
-                
-                fprintf(stdout, "Grandchild with pid %d created grandchild with pid %d \n", getpid(), getpid());
-                int greatGrandChildSleepyTime = (rand() % (Max - Min + 1)) + Min;
-                child(grandChild_pid, things, randProcess, greatGrandChildSleepyTime, true);
-                exit(0);
-            }
-            else if (grandChild_pid > 0)
-            {
-                fprintf(stdout, "Child created GrandChild with pid %d \n", grandChild_pid);
-            	int status;
-                waitpid(pid, &status, 0);
-                fprintf(stdout, "grandchild with pid: %d exiting\n", grandChild_pid);
-            }
         
 
         else
@@ -143,20 +125,29 @@ else if(pid > 0)
 
 // each process is independent from each other. So this means that children should be random and process should be random
 
-void child(pid_t pid, int things, int randProcess, int sleepyTime, bool isGrandChild)
+void child(int numOfChildrenToCreate)
 {
-    if (isGrandChild == true)
-    {
-        fprintf(stdout, "grandchild Process %d (pid %d) created: will sleep for %d seconds\n", randProcess, getpid(), sleepyTime);
-        sleep(sleepyTime);
-        fprintf(stdout, "grandchild Process %d (pid %d): exiting\n", randProcess, getpid());
-    }
-   
-        fprintf(stdout, "child Process %d (pid %d) created: will sleep for %d seconds\n", randProcess, getpid(), sleepyTime);
-        sleep(sleepyTime);
-        
-    
-    
+      int sleepyTime = (rand() % (Max - Min + 1)) + Min;
+        if(numOfChildrenToCreate == 0){
+            //sleep
+            return;
+        }
+            pid_t grandChild_pid = fork();
+           
+            if (grandChild_pid == 0)
+            {
+                
+                fprintf(stdout, "Grandchild with pid %d created grandchild with pid %d \n", getpid(), getpid());
+                child(numOfChildrenToCreate-1);
+                exit(0);
+            }
+            else if (grandChild_pid > 0)
+            {
+                fprintf(stdout, "Child created GrandChild with pid %d \n", grandChild_pid);
+            	int status;
+                waitpid(pid, &status, 0);
+                fprintf(stdout, "grandchild with pid: %d exiting\n", grandChild_pid);
+            }
       
     }
-
+// need to have this as a different function for pattern 2
