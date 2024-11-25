@@ -55,6 +55,7 @@ void pattern1(int things)
         // int makeMoreProcesses = (rand() % 1) + 1;
         if (pid == 0)
         {
+
             child(pid, things, randProcess, sleepyTime, false);
             exit(0);
         }
@@ -88,46 +89,55 @@ void pattern2(int things)
     int Max = 8;
     int sleepyTime = (rand() % (Max - Min + 1)) + Min;
     int randProcess = (rand() % things) + 1;
-    fprintf(stdout, "Pattern 2: creating %d processes\n", things);
+    
 
     fflush(stdout);
     pid_t pid = fork();
 
-    if (pid == 0)
-    {
-        child(pid, things, randProcess, sleepyTime, false);
-        for (jx; jx < things; jx++)
-        {
+    
+    if (pid == 0){
+            child(pid, things, randProcess, sleepyTime, false);
+       
             sleepyTime = (rand() % (Max - Min + 1)) + Min;
             randProcess = (rand() % things) + 1;
             pid_t grandChild_pid = fork();
+           
             if (grandChild_pid == 0)
             {
+                pid_t greatGrandChild_pid = fork();
                 
-                fprintf(stdout, "Child %d with pid %d created grandchild %d with pid %d \n", jx, pid, jx, getpid());
-                int grandChildSleepyTime = (rand() % (Max - Min + 1)) + Min;
-                child(grandChild_pid, things, randProcess, grandChildSleepyTime, true);
+                fprintf(stdout, "Grandchild with pid %d created grandchild with pid %d \n", getpid(), getpid());
+                int greatGrandChildSleepyTime = (rand() % (Max - Min + 1)) + Min;
+                child(grandChild_pid, things, randProcess, greatGrandChildSleepyTime, true);
+                exit(0);
             }
             else if (grandChild_pid > 0)
             {
-                int status;
+                fprintf(stdout, "Child created GrandChild with pid %d \n", grandChild_pid);
+            	int status;
                 waitpid(pid, &status, 0);
-                fprintf(stdout, "grandchild %d with pid: %d completed\n", jx, grandChild_pid);
+                fprintf(stdout, "grandchild with pid: %d exiting\n", grandChild_pid);
             }
+        
 
-            else
-            {
-                perror("Fork Failed");
-                exit(1);
-            }
+        else
+        {
+            perror("Fork Failed");
+            exit(1);
         }
-    }
-    else if (pid > 0)
-    {
+        fprintf(stdout, "Grandchild with pid %d exiting\n", getpid());
+        exit(0);
+    
 
+}
+else if(pid > 0)
+    {
+        fprintf(stdout, "Pattern 2: creating %d processes\n", things);
+	    fprintf(stdout, "Parent created child with pid %d \n", getpid());
         int status;
         waitpid(pid, &status, 0);
-        fprintf(stdout, "Child %d with pid%d completed\n", jx, pid);
+        fprintf(stdout, "Child with pid %d exiting\n", getpid());
+        fprintf(stdout, "Parent Completed\n");
     }
 }
 
@@ -135,17 +145,18 @@ void pattern2(int things)
 
 void child(pid_t pid, int things, int randProcess, int sleepyTime, bool isGrandChild)
 {
-
     if (isGrandChild == true)
     {
         fprintf(stdout, "grandchild Process %d (pid %d) created: will sleep for %d seconds\n", randProcess, getpid(), sleepyTime);
         sleep(sleepyTime);
         fprintf(stdout, "grandchild Process %d (pid %d): exiting\n", randProcess, getpid());
     }
-    else
-    {
+   
         fprintf(stdout, "child Process %d (pid %d) created: will sleep for %d seconds\n", randProcess, getpid(), sleepyTime);
         sleep(sleepyTime);
-        fprintf(stdout, "child Process %d (pid %d): exiting\n", randProcess, getpid());
+        
+    
+    
+      
     }
-}
+
