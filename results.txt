@@ -1,0 +1,64 @@
+Pattern 1 with things as 8:
+
+Pattern 1: creating 8 processes
+Parent created child 1 with pid 23813
+Parent created child 2 with pid 23813
+child Process 2 (pid 23814) created: will sleep for 6 seconds
+child Process 7 (pid 23815) created: will sleep for 4 seconds
+Parent created child 3 with pid 23813
+child Process 7 (pid 23816) created: will sleep for 4 seconds
+Parent created child 4 with pid 23813
+child Process 1 (pid 23817) created: will sleep for 7 seconds
+Parent created child 5 with pid 23813
+child Process 8 (pid 23818) created: will sleep for 7 seconds
+Parent created child 6 with pid 23813
+child Process 8 (pid 23819) created: will sleep for 6 seconds
+Parent created child 7 with pid 23813
+child Process 7 (pid 23820) created: will sleep for 4 seconds
+Parent created child 8 with pid 23813
+child Process 1 (pid 23821) created: will sleep for 3 seconds
+child Process 1 (pid 23821): exiting
+child Process 7 (pid 23815): exiting
+child Process 7 (pid 23816): exiting
+child Process 7 (pid 23820): exiting
+child Process 2 (pid 23814): exiting
+Child 1 with pid: 23814 completed
+Parent Completed
+Child 2 with pid: 23815 completed
+Parent Completed
+Child 3 with pid: 23816 completed
+Parent Completed
+child Process 8 (pid 23819): exiting
+child Process 1 (pid 23817): exiting
+child Process 8 (pid 23818): exiting
+Child 4 with pid: 23817 completed
+Parent Completed
+Child 5 with pid: 23818 completed
+Parent Completed
+Child 6 with pid: 23819 completed
+Parent Completed
+Child 7 with pid: 23820 completed
+Parent Completed
+Child 8 with pid: 23821 completed
+Parent Completed
+
+Pattern 2 with things as 8:
+
+Pattern 2: creating 8 processes
+Parent created child with pid 22174
+Grandchild with pid 22176 created
+Grandchild with pid 22177 created
+Grandchild with pid 22178 created
+Grandchild with pid 22179 created
+Grandchild with pid 22180 created
+Grandchild with pid 22181 created
+Grandchild with pid 22182 created
+grandchild with pid: 22182 exiting
+grandchild with pid: 22181 exiting
+grandchild with pid: 22180 exiting
+grandchild with pid: 22179 exiting
+grandchild with pid: 22178 exiting
+grandchild with pid: 22177 exiting
+grandchild with pid: 22176 exiting
+Child with pid 22174 exiting
+Parent Completed
