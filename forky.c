@@ -5,11 +5,11 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <time.h>
-#include <stdbool.h>
 
 void pattern1(int things);
 void pattern2(int things);
-void child(pid_t pid, int things, int randProcess, int sleepyTime, bool isGrandChild);
+void child1(pid_t pid, int things, int randProcess, int sleepyTime);
+void child2(int numOfChildrenToCreate);
 
 int main(int argc, char *argv[])
 {
@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
         }
         else if (pattern == 2)
         {
+            fprintf(stdout, "Pattern 2: creating %d processes\n", things);
             pattern2(things);
         }
     }
@@ -52,11 +53,10 @@ void pattern1(int things)
         int Max = 8;
         int sleepyTime = (rand() % (Max - Min + 1)) + Min;
         int randProcess = (rand() % things) + 1;
-        // int makeMoreProcesses = (rand() % 1) + 1;
         if (pid == 0)
         {
 
-            child(pid, things, randProcess, sleepyTime, false);
+            child1(pid, things, randProcess, sleepyTime);
             exit(0);
         }
         else if (pid > 0)
@@ -73,11 +73,11 @@ void pattern1(int things)
     }
     for (int kx = 0; kx < things; kx++)
     {
-
         int status;
         wx++;
         waitpid(pids[kx], &status, 0);
         fprintf(stdout, "Child %d with pid: %d completed\n", wx, pids[kx]);
+        fprintf(stdout, "Parent Completed\n");
     }
 }
 
@@ -85,36 +85,17 @@ void pattern2(int numOfChildrenToCreate)
 {
     int ix;
     int jx = 1;
-    int Min = 1;
-    int Max = 8;
-    int sleepyTime = (rand() % (Max - Min + 1)) + Min;
-    int randProcess = (rand() % things) + 1;
-    
-
     fflush(stdout);
     pid_t pid = fork();
 
-    
-    if (pid == 0){
-            child(numOfChildrenToCreate-1);
-            exit(0);
-       
-           
-        
-
-        else
-        {
-            perror("Fork Failed");
-            exit(1);
-        }
-        fprintf(stdout, "Grandchild with pid %d exiting\n", getpid());
-        exit(0);
-    
-
-}
-else if(pid > 0)
+    if (pid == 0)
     {
-        fprintf(stdout, "Pattern 2: creating %d processes\n", things);
+            
+        child2(numOfChildrenToCreate-1);
+        exit(0);
+    }
+    else if(pid > 0)
+    {
 	    fprintf(stdout, "Parent created child with pid %d \n", getpid());
         int status;
         waitpid(pid, &status, 0);
@@ -125,11 +106,21 @@ else if(pid > 0)
 
 // each process is independent from each other. So this means that children should be random and process should be random
 
-void child(int numOfChildrenToCreate)
+void child1(pid_t pid, int things, int randProcess, int sleepyTime)
 {
+    fprintf(stdout, "child Process %d (pid %d) created: will sleep for %d seconds\n", randProcess, getpid(), sleepyTime);
+    sleep(sleepyTime);
+    fprintf(stdout, "child Process %d (pid %d): exiting\n", randProcess, getpid());
+    
+}
+
+void child2(int numOfChildrenToCreate)
+{
+      int Min = 1;
+      int Max = 8;
       int sleepyTime = (rand() % (Max - Min + 1)) + Min;
         if(numOfChildrenToCreate == 0){
-            //sleep
+            sleep(sleepyTime);
             return;
         }
             pid_t grandChild_pid = fork();
@@ -137,17 +128,15 @@ void child(int numOfChildrenToCreate)
             if (grandChild_pid == 0)
             {
                 
-                fprintf(stdout, "Grandchild with pid %d created grandchild with pid %d \n", getpid(), getpid());
-                child(numOfChildrenToCreate-1);
+                fprintf(stdout, "Grandchild with pid %d created \n", getpid());
+                child2(numOfChildrenToCreate-1);
                 exit(0);
             }
             else if (grandChild_pid > 0)
             {
-                fprintf(stdout, "Child created GrandChild with pid %d \n", grandChild_pid);
             	int status;
-                waitpid(pid, &status, 0);
+                waitpid(grandChild_pid, &status, 0);
                 fprintf(stdout, "grandchild with pid: %d exiting\n", grandChild_pid);
             }
       
     }
-// need to have this as a different function for pattern 2
